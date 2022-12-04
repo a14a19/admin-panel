@@ -1,0 +1,154 @@
+.addproduct {
+  min-height: calc(100vh - 245px);
+  background-color: var(--ternary-bg-color);
+  box-shadow: var(--boxShadow);
+  margin: 60px auto;
+  padding: 30px;
+  max-width: 55%;
+  color: var(--txt);
+  h3 {
+    margin-bottom: 30px;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+    .ltContainer {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      flex: 0 0 100%;
+      max-width: 100%;
+      label {
+        margin-bottom: 10px;
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        background-color: var(--input-bg-color);
+        border: 2px solid transparent;
+        outline: none;
+        padding: 10px;
+        color: var(--txt);
+        font-size: 16px;
+        margin-bottom: 20px;
+        transition: all 0.25s;
+        &:focus {
+          background-color: var(--primary-bg-color);
+          border: 2px solid var(--highlight);
+        }
+      }
+      select {
+        color: #acc6de !important;
+      }
+      .dateUnit {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .date {
+          margin-right: 10px;
+          width: 100%;
+          input {
+            margin-top: 10px;
+          }
+        }
+        .number {
+          margin-left: 10px;
+          width: 100%;
+          input {
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+    .rtContainer {
+      flex: 0 0 100%;
+      max-width: 100%;
+      label {
+        display: block;
+        width: 100%;
+        height: 240px;
+        background-color: #aaaaaa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        position: relative;
+        i {
+          z-index: 10;
+        }
+        &::before {
+          content: " ";
+          background-color: var(--ternary-bg-color);
+          position: absolute;
+          top: auto;
+          bottom: auto;
+          right: auto;
+          left: auto;
+          width: 50px;
+          height: 50px;
+          z-index: 0;
+          border-radius: 50%;
+        }
+      }
+      .filebtn {
+        margin-bottom: 20px;
+        margin-top: 20px;
+        background-color: var(--btn);
+        color: var(--txt);
+        border: 2px solid var(--btn);
+        width: 100%;
+        padding: 15px;
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.25s;
+        &:hover {
+          background-color: var(--ternary-bg-color);
+          color: var(--btn);
+        }
+      }
+    }
+  }
+  .addnow {
+    background-color: var(--btn);
+    color: var(--txt);
+    border: 2px solid var(--btn);
+    width: 100%;
+    padding: 15px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    &:hover {
+      background-color: var(--ternary-bg-color);
+      color: var(--btn);
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .addproduct {
+    margin: 60px 20px;
+    max-width: 100%;
+    .container {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      .ltContainer {
+        .dateUnit {
+          justify-content: center;
+          flex-direction: column;
+          width: 100%;
+          .number,
+          .date {
+            margin-left: 0px;
+            margin-right: 0px;
+          }
+        }
+      }
+    }
+  }
+}
