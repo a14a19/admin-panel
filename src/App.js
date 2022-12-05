@@ -39,13 +39,13 @@ function App() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route exact path='/' element={<Navigate to='/login' />} />
+            <Route exact path='/' element={<Navigate to='/home' />} />
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/home' element={log ? <Home /> : <Login />} />
             <Route exact path='/product' element={log ? <Product /> : <Login />} />
-            <Route exact path='/product/add_product' element={log && <AddProduct />} />
+            <Route exact path='/product/add_product' element={log ? <AddProduct /> : <Login />} />
             <Route exact path='/account' element={log ? <Account /> : <Login />} />
-            <Route path='*' element={<Pagenotfound />}/>
+            <Route path='*' element={<Pagenotfound />} />
           </Routes>
           <Footer />
         </BrowserRouter>

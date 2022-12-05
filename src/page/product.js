@@ -11,7 +11,6 @@ function Product() {
     const [addCat, setAddCat] = useState(true)
 
     const dlt = (e) => {
-        console.log(e);
     }
 
     const checkFn = (e) => {
@@ -91,7 +90,7 @@ function Product() {
                 </label>
                 }
                 
-                <button className={classes.adding} onClick={() => handleClick()}>add new category</button>
+                <button className={classes.adding} onClick={() => handleClick()}>{addCat ? 'add new category' : 'Add'}</button>
             </div>
         </div>
     )

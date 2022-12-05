@@ -1,9 +1,10 @@
 import classes from './account.module.scss';
+import React from 'react';
 
 import { useContext, useEffect, useState } from 'react';
 import AdminContext from '../context/adminContext';
 
-const accObj = {
+let accObj = {
     email: '',
     name: '',
     password: '',
@@ -16,37 +17,38 @@ function Account() {
     const adminData = admin.items.accountsPage
     const [accData, setAccData] = useState({})
     const [accountsPage, setAccountsPage] = useState(adminData)
-    const [Admin, setAdmin] = useState({})
+    const [Admin, setAdmin] = useState(accObj)
     const [change, setChnge] = useState(adminData)
     const [selectData, setSelectData] = useState()
     const accOpt = admin.accType.map((item, i) => {
         return <option key={i}>{item}</option>
     })
-    console.log(adminData);
+    // console.log(adminData); 
     const update = (k, v) => {
-        console.log({ [k]: v });
-        if ('Admin' === selectData) {
-            setAdmin({ ...adminData.Admin, [k]: v })
-        }
-    }
+        // console.log({...accObj, [e.target.name]: e.target.value });
+        setAdmin({...Admin, [k]: v })
+        // if ('Admin' === selectData) {
+        //     setAdmin({ ...adminData.Admin, [e.target.name]: e.target.value })
+        // }
+    } 
     console.log(Admin);
-    useEffect(() => {
-        console.log({ ...admin.items, accountsPage });
-        if('Admin' === selectData) {
-            setAccountsPage({ ...admin.items.accountsPage, Admin })
-            localStorage.setItem('items', JSON.stringify({ ...admin.items, accountsPage }));
-        }
-    }, [Admin])
+    // useEffect(() => {
+    //     console.log({ ...admin.items, accountsPage });
+    //     if('Admin' === selectData) {
+    //         setAccountsPage({ ...admin.items.accountsPage, Admin })
+    //         localStorage.setItem('items', JSON.stringify({ ...admin.items, accountsPage }));
+    //     }
+    // }, [Admin])
 
-    const updateBtn = () => {
-        console.log('clicked');
+    const updateBtn = (e) => {
+        e.preventDefault()
     }
 
     const selectChange = (e) => {
         setSelectData(e.target.value)
         if ('Admin' === e.target.value) {
             setAccData({
-                ...accObj,
+                ...accData,
                 email: adminData.Admin.email,
                 name: adminData.Admin.name,
                 password: adminData.Admin.password,
@@ -56,7 +58,7 @@ function Account() {
         }
         else if ('Customer' === e.target.value) {
             setAccData({
-                ...accObj,
+                ...accData,
                 email: adminData.Customer.email,
                 name: adminData.Customer.name,
                 password: adminData.Customer.password,
@@ -66,7 +68,7 @@ function Account() {
         }
         else if ('Editor' === e.target.value) {
             setAccData({
-                ...accObj,
+                ...accData,
                 email: adminData.Editor.email,
                 name: adminData.Editor.name,
                 password: adminData.Editor.password,
@@ -76,7 +78,7 @@ function Account() {
         }
         else if ('Merchant' === e.target.value) {
             setAccData({
-                ...accObj,
+                ...accData,
                 email: adminData.Merchant.email,
                 name: adminData.Merchant.name,
                 password: adminData.Merchant.password,
@@ -86,7 +88,7 @@ function Account() {
         }
         else {
             setAccData({
-                ...accObj,
+                ...accData,
                 email: '',
                 name: '',
                 password: '',
@@ -124,22 +126,22 @@ function Account() {
                     <div className={classes.accSubSetting}>
                         <div>
                             <label htmlFor='name'>Account Name</label>
-                            <input id='name' type='text' placeholder={accData.name} onChange={(e) => update('name', e.target.value)} />
+                            <input id='name' type='text' name='name' placeholder={accData.name} onChange={(e) => update(e.target.name, e.target.value)} />
 
                             <label htmlFor='password'>Password</label>
-                            <input id='password' type='text' placeholder={accData.password} onChange={(e) => update('password', e.target.value)} />
+                            <input id='password' type='text' placeholder={accData.password}  name='password'  onChange={(e) => update('password', e.target.value)} />
 
                             <label htmlFor='phone'>Phone</label>
-                            <input id='phone' type='number' placeholder={accData.phone} onChange={(e) => update('phone', e.target.value)} />
+                            <input id='phone' type='number' placeholder={accData.phone}  name='phone' onChange={(e) => update('phone', e.target.value)} />
                         </div>
                         <div>
                             <label htmlFor='email'>Account Email</label>
-                            <input id='email' type='email' placeholder={accData.email} onChange={(e) => update('email', e.target.value)} />
+                            <input id='email' type='email' name='email' placeholder={accData.email} onChange={(e) => update('email', e.target.value)} />
 
                             <label htmlFor='accRePass'>Re-enter Password</label>
-                            <input type='password' id='accRePass' onChange={(e) => update('accRePass', e.target.value)} />
+                            <input type='password' id='accRePass'  name='accRePass' onChange={(e) => update('accRePass', e.target.value)} />
 
-                            <button onClick={() => updateBtn()}>update your profile</button>
+                            <button onClick={(e) => updateBtn(e)} type='submit'>update your profile</button>
                         </div>
                     </div>
                     <button>delete your account</button>
