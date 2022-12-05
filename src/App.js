@@ -17,7 +17,6 @@ function App() {
 
   const [items, setItems] = useState({})
   const [log, setLog] = useState(false)
-  const accType = ['Admin', 'Customer', 'Editor', 'Merchant']
 
   useEffect(() => {
     axios.get('https://reactmusicplayer-ab9e4.firebaseio.com/project-data.json')
@@ -35,7 +34,7 @@ function App() {
 
   return (
     <div className={classes.app}>
-      <AdminContext.Provider value={{ log, setLog, items, accType }}>
+      <AdminContext.Provider value={{ log, setLog, items }}>
         <BrowserRouter>
           <Header />
           <Routes>

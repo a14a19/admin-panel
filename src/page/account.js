@@ -20,7 +20,9 @@ function Account() {
     const [Admin, setAdmin] = useState(accObj)
     const [change, setChnge] = useState(adminData)
     const [selectData, setSelectData] = useState()
-    const accOpt = admin.accType.map((item, i) => {
+
+    console.log(Object.keys(adminData));
+    const accOpt = Object.keys(adminData).map((item, i) => {
         return <option key={i}>{item}</option>
     })
     // console.log(adminData); 
@@ -126,7 +128,7 @@ function Account() {
                     <div className={classes.accSubSetting}>
                         <div>
                             <label htmlFor='name'>Account Name</label>
-                            <input id='name' type='text' name='name' placeholder={accData.name} onChange={(e) => update(e.target.name, e.target.value)} />
+                            <input id='name' type='text' name='name' placeholder={accData.name} value={Admin.name} onChange={(e) => update(e.target.name, e.target.value)} />
 
                             <label htmlFor='password'>Password</label>
                             <input id='password' type='text' placeholder={accData.password}  name='password'  onChange={(e) => update('password', e.target.value)} />

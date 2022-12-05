@@ -22,7 +22,7 @@ function AddProduct() {
         error: '',
         text: ''
     })
-
+    
     const categories = adminData.categories.map((item, i) => {
         return (
             <option key={i}>
@@ -30,30 +30,29 @@ function AddProduct() {
             </option>
         )
     })
-
+    
     const hiddenFileInput = React.useRef(null);
-    const formRef = React.useRef(null)
-
+    
     const handleClick = event => {
         event.preventDefault()
         hiddenFileInput.current.click();
     };
-
+    
     const update = (k, v) => {
-        console.log(k, v);
         setPPage({ ...pPage, [k]: v })
     }
-
-    console.log(pPage);
-
-    useEffect(() => {
-
-    })
-
+    
     const addProduct = (e) => {
         e.preventDefault()
         setSubmitPro(pPage)
     }
+
+    useEffect(() => {
+        if(pPage.name !== '' && pPage.description !== '' && pPage.category !== '' && pPage.expireDate !== '' && pPage.stock !== ''){
+            adminData.products.push(submitPro)
+            localStorage.setItem('items', JSON.stringify(admin.items))
+        }
+    }, [submitPro])
 
     const handleChange = event => {
         const fileUploaded = event.target.files[0];
