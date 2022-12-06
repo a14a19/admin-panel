@@ -47,6 +47,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: transparent;
+        border: 2px solid transparent;
+        color: var(--txt);
         img {
           width: 345px;
           cursor: pointer;
@@ -55,6 +58,7 @@
           width: 40px;
           height: 40px;
           background-color: rgba(57, 78, 100, 0.7);
+          color: var(--txt);
           display: none;
           align-items: center;
           justify-content: center;
@@ -79,16 +83,37 @@
         color: var(--txt);
         border: 2px solid var(--btn);
         width: 100%;
-        padding: 15px;
-        font-size: 14px;
-        text-transform: uppercase;
-        font-weight: 600;
-        cursor: pointer;
         transition: all 0.25s;
+        label {
+          transition: all 0.25s;
+          cursor: pointer;
+          text-transform: uppercase;
+          padding: 15px;
+          font-size: 14px;
+          font-weight: 600;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          padding: 15px;
+        }
+        input {
+          display: none;
+        }
         &:hover {
           background-color: var(--ternary-bg-color);
           color: var(--btn);
         }
+      }
+      .fileerrorRed {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        color: red;
+      }
+      .fileerrorGreen {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        color: rgb(0, 255, 0);
       }
     }
     .accSetting {
@@ -111,6 +136,12 @@
           flex: 0 0 50%;
           label {
             margin-bottom: 12px;
+          }
+          .redborder {
+            border: 2px solid transparent;
+          }
+          .greenborder {
+            border: 2px solid rgb(0, 255, 0);
           }
           input {
             margin-bottom: 18px;

@@ -42,7 +42,7 @@ function Product() {
             })
         }
         localStorage.setItem('items', JSON.stringify(admin.items))
-    })
+    }, [selectall, dltCValue, dltValue, valueCat])
 
     const alldlt = (e) => {
         setSelectall(checkbtn)
@@ -108,7 +108,7 @@ function Product() {
     }
 
     return (
-        <div className={classes.product}>
+        <form className={classes.product}>
             <div className={classes.products}>
                 <div className={classes.tableContainer}>
                     <table>
@@ -145,7 +145,7 @@ function Product() {
 
                 <button className={classes.adding} onClick={() => handleClick()}>{addCat ? 'add new category' : 'Add'}</button>
             </div>
-        </div>
+        </form>
     )
 }
 
