@@ -35,7 +35,6 @@ function Product() {
                 adminData.products.map((y) => {
                     if (x.name === y.name && x.category === y.category) {
                         let indx = adminData.products.indexOf(y)
-                        console.log(x, y, indx);
                         adminData.products.splice(indx, 1)
                     }
                 })
@@ -107,8 +106,9 @@ function Product() {
         setAddCat(current => !current)
     }
 
+
     return (
-        <form className={classes.product}>
+        <div className={classes.product}>
             <div className={classes.products}>
                 <div className={classes.tableContainer}>
                     <table>
@@ -145,7 +145,7 @@ function Product() {
 
                 <button className={classes.adding} onClick={() => handleClick()}>{addCat ? 'add new category' : 'Add'}</button>
             </div>
-        </form>
+        </div>
     )
 }
 

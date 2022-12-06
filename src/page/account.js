@@ -52,7 +52,6 @@ function Account() {
         e.preventDefault()
         if (accData.password !== '' && accData.accRePass !== '') {
             if (accData.password === accData.accRePass) {
-                console.log(true);
                 setPassCheck(true)
                 if (selectData !== 'Select account') {
                     setChnge({ ...adminData, [selectData]: accData })
@@ -67,22 +66,25 @@ function Account() {
         if (selectData === "Admin") {
             delete accData.profilePic
             setAccData({ ...accData })
+            setFile('')
         } else if (selectData === "Customer") {
             delete accData.profilePic
             setAccData({ ...accData })
+            setFile('')
         } else if (selectData === "Editor") {
             delete accData.profilePic
             setAccData({ ...accData })
+            setFile('')
         } else if (selectData === "Merchant") {
             delete accData.profilePic
             setAccData({ ...accData })
+            setFile('')
         }
     }
 
     const fileUpload = (e) => {
         e.preventDefault()
         const fileUploaded = e.target.files[0];
-        console.log(fileUploaded);
         if (fileUploaded.type === "image/jpg" || fileUploaded.type === "image/PNG" || fileUploaded.type === "image/jpeg" || fileUploaded.type === "image/bmp" || fileUploaded.type === "image/svg" || fileUploaded.type === "image/webp") {
             setFile(fileUploaded)
             setFileError({
