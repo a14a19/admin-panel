@@ -2,6 +2,7 @@ import classes from './addproduct.module.scss';
 
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import AdminContext from '../context/adminContext';
+import { useNavigate } from 'react-router-dom';
 
 let productData = {
     category: "",
@@ -16,13 +17,14 @@ function AddProduct() {
 
     const admin = useContext(AdminContext)
     const adminData = admin.items.productsPage
+    const navigate = useNavigate()
     const [pPage, setPPage] = useState(productData)
     const [submitPro, setSubmitPro] = useState(pPage)
     const [fileError, setFileError] = useState({
         error: '',
         text: ''
     })
-    
+
     const categories = adminData.categories.map((item, i) => {
         return (
             <option key={i}>
@@ -30,25 +32,26 @@ function AddProduct() {
             </option>
         )
     })
-    
+
     const hiddenFileInput = React.useRef(null);
-    
+
     const handleClick = event => {
         event.preventDefault()
         hiddenFileInput.current.click();
     };
-    
+
     const update = (k, v) => {
         setPPage({ ...pPage, [k]: v })
     }
-    
+
     const addProduct = (e) => {
         e.preventDefault()
         setSubmitPro(pPage)
+        navigate(-1)
     }
 
     useEffect(() => {
-        if(pPage.name !== '' && pPage.description !== '' && pPage.category !== '' && pPage.expireDate !== '' && pPage.stock !== ''){
+        if (pPage.name !== '' && pPage.description !== '' && pPage.category !== '' && pPage.expireDate !== '' && pPage.stock !== '') {
             adminData.products.push(submitPro)
             localStorage.setItem('items', JSON.stringify(admin.items))
         }

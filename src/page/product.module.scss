@@ -24,14 +24,17 @@
         width: 100%;
         font-weight: 600;
         font-size: 14px;
+        thead {
+          background-color: #486177;
+          border-bottom: 1px solid #486177;
+          th {
+            padding: 15px;
+          }
+        }
         tbody {
           tr {
             background-color: #50697f;
             border-bottom: 1px solid #486177;
-            &:first-child {
-              background-color: #486177;
-            }
-            th,
             td {
               padding: 15px;
               input[type="checkbox"] {

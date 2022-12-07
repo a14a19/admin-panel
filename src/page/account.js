@@ -13,13 +13,16 @@ let accObj = {
     accRePass: ''
 }
 
+const passRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{6,16}$/;
+
 function Account() {
     const admin = useContext(AdminContext)
     const adminData = admin.items.accountsPage
     const [accData, setAccData] = useState(accObj)
-    const [change, setChnge] = useState({ ...adminData.selectData })
     const [selectData, setSelectData] = useState('')
-    const [passCheck, setPassCheck] = useState()
+    const [change, setChnge] = useState(null)
+    const [passCheck, setPassCheck] = useState('')
+    const [updatePro, setUpdatepro] = useState(false)
     const hiddenFileInput = React.useRef(null)
     const [file, setFile] = useState('')
     const [fileError, setFileError] = useState({
@@ -30,12 +33,12 @@ function Account() {
     const accOpt = Object.keys(adminData).map((item, i) => {
         return <option key={i}>{item}</option>
     })
-    const update = (k, v) => {
-        setAccData({ ...accData, [k]: v })
-    }
 
-    const form = (e) => {
-        e.preventDefault()
+    const update = (k, v) => {
+        if (k === 'password' && v.match(passRegex)) {
+            setPassCheck(true)
+        }
+        setAccData({ ...accData, [k]: v })
     }
 
     useEffect(() => {
@@ -43,23 +46,21 @@ function Account() {
         if (selectData === 'Select account' || selectData === '') {
             localStorage.setItem('items', JSON.stringify(admin.items))
         } else {
-            localStorage.setItem('items', JSON.stringify({ ...admin.items, ['accountsPage']: change }))
+            localStorage.setItem('items', JSON.stringify({ ...admin.items, accountsPage: change }))
+            admin.handleSetItems({ ...admin.items, accountsPage: change })
         }
 
     }, [change])
 
     const updateBtn = (e) => {
         e.preventDefault()
-        if (accData.password !== '' && accData.accRePass !== '') {
-            if (accData.password === accData.accRePass) {
-                setPassCheck(true)
-                if (selectData !== 'Select account') {
-                    setChnge({ ...adminData, [selectData]: accData })
-                }
-            } else {
-                setPassCheck(false)
+        if (accData.password === accData.accRePass) {
+            setPassCheck(true)
+            if (selectData !== 'Select account') {
+                setChnge({ ...adminData, [selectData]: accData })
             }
         }
+        setUpdatepro(current => !current)
     }
 
     const dltimg = () => {
@@ -202,7 +203,7 @@ function Account() {
                         <label htmlFor='fileup'>
                             upload new photo
                         </label>
-                        <input type='file' onChange={fileUpload} id='fileup' ref={hiddenFileInput}/>
+                        <input type='file' onChange={fileUpload} id='fileup' ref={hiddenFileInput} />
                     </button>
 
                     {fileError && <div className={fileError.text}>{fileError.error}</div>}
@@ -215,7 +216,7 @@ function Account() {
                             <input id='name' type='text' name='name' value={accData.name} onChange={(e) => update(e.target.name, e.target.value)} />
 
                             <label htmlFor='password'>Password</label>
-                            <input id='password' type='text' value={accData.password} name='password' onChange={(e) => update('password', e.target.value)} className={passCheck ? classes.greenborder : classes.redborder} />
+                            <input id='password' type='text' value={accData.password} name='password' onChange={(e) => update('password', e.target.value)} className={passCheck && classes.greenborder} />
 
                             <label htmlFor='phone'>Phone</label>
                             <input id='phone' type='number' value={accData.phone} name='phone' onChange={(e) => update('phone', e.target.value)} />
@@ -225,9 +226,14 @@ function Account() {
                             <input id='email' type='email' name='email' value={accData.email} onChange={(e) => update('email', e.target.value)} />
 
                             <label htmlFor='accRePass'>Re-enter Password</label>
-                            <input type='password' id='accRePass' name='accRePass' value={accData.accRePass} onChange={(e) => update('accRePass', e.target.value)} className={passCheck ? classes.greenborder : classes.redborder} />
+                            <input type='password' id='accRePass' name='accRePass' value={accData.accRePass} onChange={(e) => update('accRePass', e.target.value)} className={passCheck && classes.greenborder} />
 
-                            <button onClick={(e) => updateBtn(e)} type='submit'>update your profile</button>
+                            <button onClick={(e) => updateBtn(e)} type='submit'>
+                                update your profile
+                                {updatePro &&
+                                    <span><i class="fa-solid fa-check"></i></span>
+                                }
+                            </button>
                         </div>
                     </div>
                     <button>delete your account</button>

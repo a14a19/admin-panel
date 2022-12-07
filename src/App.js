@@ -22,19 +22,17 @@ function App() {
     axios.get('https://reactmusicplayer-ab9e4.firebaseio.com/project-data.json')
       .then(data => {
         localStorage.setItem('items', JSON.stringify(data.data));
+        setItems(data.data)
       })
   }, []);
 
-  useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('items'));
-    if (items) {
-      setItems(items)
-    }
-  }, [])
+  const handleSetItems = (newItems) => {
+    setItems(newItems)
+  }
 
   return (
     <div className={classes.app}>
-      <AdminContext.Provider value={{ log, setLog, items }}>
+      <AdminContext.Provider value={{ log, setLog, items, handleSetItems, setItems }}>
         <BrowserRouter>
           <Header />
           <Routes>

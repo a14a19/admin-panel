@@ -2,6 +2,7 @@
   min-height: calc(100vh - 245px);
   margin: 60px 175px;
   color: var(--txt);
+  position: relative;
   .accountlist {
     width: 100%;
     padding: 30px;
@@ -138,7 +139,7 @@
             margin-bottom: 12px;
           }
           .redborder {
-            border: 2px solid transparent;
+            border: 2px solid red;
           }
           .greenborder {
             border: 2px solid rgb(0, 255, 0);
@@ -173,6 +174,11 @@
             &:hover {
               background-color: var(--ternary-bg-color);
               color: var(--btn);
+            }
+            span {
+              color: rgb(0, 255, 0);
+              font-weight: 700;
+              margin-left: 10px;
             }
           }
           &:first-child {
