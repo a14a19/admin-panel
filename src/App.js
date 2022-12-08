@@ -37,7 +37,7 @@ function App() {
           <Header />
           <Routes>
             <Route exact path='/' element={<Navigate to='/home' />} />
-            <Route exact path='/login' element={<Login />} />
+            <Route exact path='/login' element={log ? <Navigate to='/home' /> : <Login />} />
             <Route exact path='/home' element={log ? <Home /> : <Login />} />
             <Route exact path='/product' element={log ? <Product /> : <Login />} />
             <Route exact path='/product/add_product' element={log ? <AddProduct /> : <Login />} />
